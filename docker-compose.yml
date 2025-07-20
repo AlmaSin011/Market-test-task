@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: market_postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - market-net
+
+  feeds:
+    build:
+      context: ./feeds
+    container_name: price_feed_service
+    ports:
+      - "8081:8081"
+    networks:
+      - market-net
+
+  market:
+    build:
+      context: ./market
+    container_name: market_service
+    depends_on:
+      - postgres
+      - feeds
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
+      PRICE_FEED_BASE_URL: ${PRICE_FEED_BASE_URL}
+    networks:
+      - market-net
+
+volumes:
+  pgdata:
+
+networks:
+  market-net:

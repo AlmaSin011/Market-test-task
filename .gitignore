@@ -1,0 +1,44 @@
+### Maven ###
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+
+### IntelliJ IDEA ###
+.idea/
+*.iml
+*.iws
+out/
+
+### Eclipse ###
+.project
+.classpath
+.settings/
+bin/
+
+### VS Code ###
+.vscode/
+
+### OS files ###
+.DS_Store
+Thumbs.db
+
+### Logs ###
+*.log
+logs/
+*.out
+
+### Docker ###
+**/docker-compose.override.yml
+**/Dockerfile.local
+**/.dockerignore
+
+### Test and Coverage ###
+**/test-output/
+**/coverage/
+**/.coverage
+**/jacoco.exec
+**/jacoco-report/
