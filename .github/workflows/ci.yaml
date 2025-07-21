@@ -34,12 +34,12 @@ jobs:
       - name: Build feeds service
         run: |
           cd feeds
-          mvn clean verify
+          mvn clean package
 
       - name: Build market service
         run: |
           cd market
-          mvn clean verify
+          mvn clean package
 
       - name: Build Docker images
         run: docker-compose build
