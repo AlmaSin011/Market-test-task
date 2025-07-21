@@ -10,8 +10,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -24,7 +22,7 @@ public class OrderRequest {
     private String symbol;
 
     @NotNull
-    private OrderSide side;// buy and sell values depends on side
+    private OrderSide side;
 
     @Min(1)
     private int quantity;

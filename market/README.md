@@ -39,5 +39,5 @@ java -jar target/mini-market-order-0.0.1-SNAPSHOT.jar
 docker-compose up -d
 ```
 ## Swagger
-Visit http://localhost:8080/swagger-ui.html for mini market
-Visit http://localhost:8081/swagger-ui.html for mock api 
+- Visit http://localhost:8080/swagger-ui.html for mini market
+- Visit http://localhost:8081/swagger-ui.html for mock api 

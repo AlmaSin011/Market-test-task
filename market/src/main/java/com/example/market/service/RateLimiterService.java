@@ -21,7 +21,6 @@ public class RateLimiterService {
         return cache.computeIfAbsent(accountId, this::newBucket);
     }
 
-    // no grater 10 requests per second
     private Bucket newBucket(String accountId) {
         Bandwidth limit = Bandwidth.classic(COPASITY, Refill.intervally(TOKENS, Duration.ofSeconds(1)));
 
