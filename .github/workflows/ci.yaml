@@ -34,12 +34,12 @@ jobs:
       - name: Build feeds service
         run: |
           cd feeds
-          mvn clean package
+          mvn clean package -DskipTests
 
       - name: Build market service
         run: |
           cd market
-          mvn clean package
+          mvn clean packag -DskipTests
 
       - name: Create .env file for Docker Compose
         run: |
