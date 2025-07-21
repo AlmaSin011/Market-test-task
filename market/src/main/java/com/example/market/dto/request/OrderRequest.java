@@ -26,6 +26,6 @@ public class OrderRequest {
     @NotNull
     private OrderSide side;
 
-    @Min(1)
+    @Min(value = 1, message = "Should be > 0")
     private int quantity;
 }

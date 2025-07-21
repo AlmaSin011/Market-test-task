@@ -10,6 +10,7 @@ import com.example.market.model.OrderStatus;
 import com.example.market.repository.ExecutionRepository;
 import com.example.market.repository.OrderRepository;
 import io.micrometer.core.instrument.MeterRegistry;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -21,6 +22,7 @@ import static com.example.market.utils.Constants.CREATED_TAG;
 import static com.example.market.utils.Constants.METRIC_NAME;
 import static com.example.market.utils.Constants.TAG_NAME;
 
+@Slf4j
 @Service
 public class OrderServiceImpl implements OrderService  {
 
@@ -45,6 +47,7 @@ public class OrderServiceImpl implements OrderService  {
 
     @Override
     public OrderResponse placeOrder(OrderRequest request) {
+        log.info("Place order started");
         PriceResponse priceResponse = priceFeedClient.getPrice(request.getSymbol());
 
         Order order = Order.builder()
@@ -55,6 +58,7 @@ public class OrderServiceImpl implements OrderService  {
                 .status(OrderStatus.EXECUTED)
                 .createdAt(LocalDateTime.now())
                 .build();
+        log.info("Place order price {}", priceResponse.getPrice());
 
         Order savedOrder = orderRepository.save(order);
 
@@ -67,7 +71,7 @@ public class OrderServiceImpl implements OrderService  {
         executionRepository.save(execution);
         orderCounter.increment();
 
-
+        log.info("Place order finished");
         return OrderResponse.builder()
                 .orderId(savedOrder.getId())
                 .accountId(savedOrder.getAccountId())
@@ -81,11 +85,13 @@ public class OrderServiceImpl implements OrderService  {
 
     @Override
     public OrderResponse getOrder(UUID id) {
+        log.info("Get order started");
         Order order = orderRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Order not found: " + id));
 
         Execution execution = executionRepository.findByOrderId(order.getId())
                 .orElseThrow(() -> new RuntimeException("Execution not found for order: " + id));
+        log.info("Get order finished");
 
         return OrderResponse.builder()
                 .orderId(order.getId())
