@@ -21,6 +21,14 @@ Mini Market Order Service is a Spring Boot microservice for managing stock order
 
 ---
 
+## Environment Variables
+
+Set the following environment variables before running the app (e.g. in a `.env` file):
+ - POSTGRES_USER=your_user
+ - POSTGRES_PASSWORD=your_password
+ - POSTGRES_DB=your_db
+ - PRICE_FEED_BASE_URL=http://host:port
+
 ## Build & Run
 
 ### Locally (without Docker)
