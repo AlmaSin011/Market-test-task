@@ -34,23 +34,4 @@ jobs:
       - name: Build feeds service
         run: |
           cd feeds
-          mvn clean package
-
-      - name: Build market service
-        run: |
-          cd market
-          mvn clean package
-
-      - name: Build Docker images
-        run: docker-compose build
-
-      - name: Run services
-        run: docker-compose up -d
-
-      - name: Wait stage
-        run: |
-          sleep 15
-
-      - name: Stop and clean up
-        if: always()
-        run: docker-compose down -v
+          m
